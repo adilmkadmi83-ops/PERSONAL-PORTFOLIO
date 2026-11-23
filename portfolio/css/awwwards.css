@@ -1,0 +1,189 @@
+/* ==========================================================================
+   AWWWARDS-LEVEL UI/UX UPGRADE CSS
+   ========================================================================== */
+
+/* 1. Custom Magnetic Cursor */
+body {
+    cursor: none; /* Hide default cursor */
+}
+
+/* Disable custom cursor on mobile */
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+    .custom-cursor, .cursor-follower {
+        display: none !important;
+    }
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-primary, #6366f1);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(99, 102, 241, 0.5);
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+}
+
+.custom-cursor.hovering {
+    width: 10px;
+    height: 10px;
+    background: var(--accent-secondary, #06b6d4);
+}
+
+.cursor-follower.hovering {
+    width: 60px;
+    height: 60px;
+    background: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.5);
+}
+
+/* 2. WebGL Background Canvas */
+.webgl-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* 3. Dynamic Mouse Spotlight */
+.mouse-spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(99, 102, 241, 0.08), 
+        transparent 40%
+    );
+    transition: background 0.1s;
+}
+
+body.light-theme .mouse-spotlight {
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(79, 70, 229, 0.05), 
+        transparent 40%
+    );
+}
+
+/* 4. Frosted Glassmorphism & 3D Tilt for Cards */
+.card, .dashboard-card, .service-card, .platform-card, .journey-step, .stat-card {
+    background: rgba(31, 41, 55, 0.4) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.1s ease-out;
+}
+
+body.light-theme .card, body.light-theme .dashboard-card, body.light-theme .service-card, body.light-theme .platform-card, body.light-theme .journey-step, body.light-theme .stat-card {
+    background: rgba(255, 255, 255, 0.6) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Neon Border Glow on hover */
+.card:hover, .dashboard-card:hover, .service-card:hover, .platform-card:hover, .journey-step:hover, .stat-card:hover {
+    border-color: rgba(99, 102, 241, 0.5) !important;
+    box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2) !important;
+}
+
+body.light-theme .card:hover, body.light-theme .dashboard-card:hover, body.light-theme .service-card:hover, body.light-theme .platform-card:hover, body.light-theme .journey-step:hover, body.light-theme .stat-card:hover {
+    border-color: rgba(79, 70, 229, 0.4) !important;
+    box-shadow: 0 10px 40px rgba(79, 70, 229, 0.15) !important;
+}
+
+
+/* 3D Parallax layers inside cards */
+.card > *, .dashboard-card > *, .service-card > *, .platform-card > *, .journey-step > *, .stat-card > * {
+    transform: translateZ(30px);
+    transition: transform 0.3s ease-out;
+}
+
+/* Realistic Glare Effect for Tilt */
+.glare-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255,255,255,0.1), transparent 50%);
+    pointer-events: none;
+    transform: translateZ(1px); /* Keep it just above the background */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+body.light-theme .glare-element {
+    background: radial-gradient(circle at var(--glare-x, 50%) var(--glare-y, 50%), rgba(255,255,255,0.4), transparent 50%);
+}
+
+.card:hover .glare-element, .dashboard-card:hover .glare-element, .service-card:hover .glare-element, .platform-card:hover .glare-element, .journey-step:hover .glare-element, .stat-card:hover .glare-element {
+    opacity: 1;
+}
+
+/* 5. Shine Sweep for Buttons */
+.btn-cta {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-cta::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: skewX(-20deg);
+    transition: left 0s;
+}
+
+.btn-cta.shine-sweep::after {
+    left: 200%;
+    transition: left 0.8s ease-in-out;
+}
+
+/* Make body background transparent so canvas shows */
+body {
+    background-color: transparent !important;
+}
+
+/* GSAP Initial States (prevents flash of unstyled content before GSAP triggers) */
+.gsap-reveal {
+    visibility: hidden;
+}

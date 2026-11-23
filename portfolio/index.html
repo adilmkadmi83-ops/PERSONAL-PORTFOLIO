@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="عادل مقدمي، متخصص مستقل في إدارة الإعلانات الرقمية والتسويق بالأداء، يساعد الشركات والعلامات التجارية على بناء حملات إعلانية قابلة للقياس والتحليل والتحسين في أسواق الخليج والأسواق الدولية." data-i18n="hero_desc">
+    <meta name="author" content="Adel Mokaddemi">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="عادل مقدمي | متخصص في إدارة الإعلانات الرقمية والتسويق بالأداء" data-i18n="site_title">
+    <meta property="og:description"
+        content="عادل مقدمي، متخصص مستقل في إدارة الإعلانات الرقمية والتسويق بالأداء، يساعد الشركات والعلامات التجارية على بناء حملات إعلانية قابلة للقياس والتحليل والتحسين في أسواق الخليج والأسواق الدولية." data-i18n="hero_desc">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://adelmokaddemi.com">
+    <meta property="og:site_name" content="عادل مقدمي">
+
+    <title data-i18n="site_title">عادل مقدمي | متخصص في إدارة الإعلانات الرقمية والتسويق بالأداء</title>
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/awwwards.css">
+
+    <!-- External Libraries (GSAP & Three.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- WebGL Background -->
+    <canvas id="webgl-canvas" class="webgl-bg"></canvas>
+
+
+    <!-- Global Top Notification -->
+    <div id="top-notification" class="top-notification">
+        <div class="top-notification-content">
+            <span id="top-notification-message"></span>
+            <button id="top-notification-close" class="top-notification-close" aria-label="إغلاق">&times;</button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo" aria-label="إعلانات عادل - Adil ads - الصفحة الرئيسية">
+                <div class="logo-wrapper">
+                    <img src="img/logo.png" alt="ADIL ADS Logo" class="logo-img">
+                    <div class="logo-text-container">
+                        <span class="logo-title">Adil ads</span>
+                        <span class="logo-subtitle" data-i18n="logo_subtitle">إعلانات عادل</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav id="navigation" aria-label="القائمة الرئيسية">
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link active" data-i18n="nav_home">الرئيسية</a></li>
+                    <li><a href="#about" class="nav-link" data-i18n="nav_about">نبذة عني</a></li>
+                    <li><a href="#services" class="nav-link" data-i18n="nav_services">الخدمات</a></li>
+                    <li><a href="#case-study" class="nav-link" data-i18n="nav_portfolio">أعمالي والنتائج</a></li>
+                    <li class="mobile-cta-li"><a href="#contact" class="btn-cta mobile-cta" data-i18n="nav_contact">تواصل معي</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- CTA Button (Desktop) -->
+                <a href="#contact" class="btn-cta desktop-cta" data-i18n="btn_contact">تواصل معي</a>
+
+                <!-- Language Selector -->
+                <div class="lang-selector">
+                    <select id="lang-select" aria-label="Select Language">
+                        <option value="en">🇺🇸 EN</option>
+                        <option value="ar">🇸🇦 AR</option>
+                        <option value="fr">🇫🇷 FR</option>
+                        <option value="es">🇪🇸 ES</option>
+                    </select>
+                </div>
+
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="تفعيل الوضع المضيء">
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor"
+                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor"
+                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-expanded="false" aria-controls="nav-menu"
+                    aria-label="فتح قائمة التنقل">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==========================================================================
+           HERO SECTION
+           ========================================================================== -->
+        <section class="hero section" id="home">
+            <div class="container grid-2">
+                <div class="hero-content reveal">
+                    <span class="hero-tagline" data-i18n="hero_tagline">إدارة الإعلانات الرقمية والتسويق بالأداء</span>
+                    <h1 class="hero-title" data-i18n="hero_title">أحوّل الإعلانات الرقمية إلى عملية قابلة للقياس والتحسين.</h1>
+                    <p class="hero-desc" data-i18n="hero_desc">أساعد الشركات والعلامات التجارية على الوصول إلى العملاء المحتملين من خلال
+                        استراتيجيات إعلانية تعتمد على فهم الجمهور، اختبار الإعلانات، تحليل البيانات، وتحسين الأداء بشكل
+                        مستمر.</p>
+
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary" data-i18n="hero_btn_primary">ابدأ مشروعك</a>
+                        <a href="#services" class="btn btn-secondary" data-i18n="hero_btn_secondary">اكتشف خدماتي</a>
+                    </div>
+
+                    <div class="hero-badge-container">
+                        <div class="badge">
+                            <span class="badge-dot"></span>
+                            <span data-i18n="hero_badge">متاح للعمل عن بُعد مع عملاء الخليج والأسواق الدولية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive CSS Dashboard Visual -->
+                <div class="hero-visual reveal delay-1">
+                    <div class="dashboard-mockup">
+                        <div class="dashboard-header">
+                            <div class="dashboard-title">
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--accent-primary)"
+                                    stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                    style="display:inline; margin-left: 5px;">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
+                                <span>Adel_Performance_Dashboard_v2</span>
+                            </div>
+                            <div class="dashboard-dots">
+                                <span class="dashboard-dot red"></span>
+                                <span class="dashboard-dot yellow"></span>
+                                <span class="dashboard-dot green"></span>
+                            </div>
+                        </div>
+
+                        <div class="db-grid">
+                            <div class="db-card">
+                                <div class="db-card-label" data-i18n="db_roas">العائد على الإنفاق الإعلاني (ROAS)</div>
+                                <div class="db-card-val"><span class="counter-val" data-target="4"
+                                        data-prefix="x">0x</span><span class="db-card-trend">↑ 15%</span></div>
+                            </div>
+                            <div class="db-card">
+                                <div class="db-card-label" data-i18n="db_conversions">التحويلات المحققة</div>
+                                <div class="db-card-val"><span class="counter-val" data-target="1840">0</span><span
+                                        class="db-card-trend">↑ 22%</span></div>
+                            </div>
+                            <div class="db-card">
+                                <div class="db-card-label" data-i18n="db_cpa">متوسط تكلفة الاكتساب (CPA)</div>
+                                <div class="db-card-val"><span class="counter-val" data-target="15"
+                                        data-suffix="$">0$</span><span class="db-card-trend down">↓ 8%</span></div>
+                            </div>
+                            <div class="db-card">
+                                <div class="db-card-label" data-i18n="db_ctr">نسبة النقر للظهور (CTR)</div>
+                                <div class="db-card-val"><span class="counter-val" data-target="3"
+                                        data-suffix="%">0%</span><span class="db-card-trend">↑ 2%</span></div>
+                            </div>
+                        </div>
+
+                        <div class="db-chart-container">
+                            <div class="db-chart-header">
+                                <div class="db-chart-title" data-i18n="db_chart_title">أداء الحملة الإعلانية (نموذج محاكاة)</div>
+                                <div class="db-chart-legend">
+                                    <div class="legend-item"><span
+                                            class="legend-color blue"></span><span data-i18n="db_visits">الزيارات</span></div>
+                                    <div class="legend-item"><span
+                                            class="legend-color cyan"></span><span data-i18n="db_sales">المبيعات</span></div>
+                                </div>
+                            </div>
+                            <div class="db-chart-visual">
+                                <svg class="db-chart-svg">
+                                    <defs>
+                                        <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="var(--accent-primary)"></stop>
+                                            <stop offset="100%" stop-color="var(--accent-secondary)"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- A mock path line chart in SVG -->
+                                    <path d="M 0 100 Q 60 70 120 85 T 240 40 T 360 60 T 480 20 T 540 10"></path>
+                                </svg>
+                                <div class="db-chart-bar" style="height: 40%"></div>
+                                <div class="db-chart-bar" style="height: 55%"></div>
+                                <div class="db-chart-bar" style="height: 48%"></div>
+                                <div class="db-chart-bar" style="height: 70%"></div>
+                                <div class="db-chart-bar" style="height: 85%"></div>
+                                <div class="db-chart-bar" style="height: 60%"></div>
+                                <div class="db-chart-bar" style="height: 95%"></div>
+                            </div>
+                            <div class="db-chart-axis">
+                                <span data-i18n="db_week1">الأسبوع 1</span>
+                                <span data-i18n="db_week2">الأسبوع 2</span>
+                                <span data-i18n="db_week3">الأسبوع 3</span>
+                                <span data-i18n="db_week4">الأسبوع 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           ABOUT SECTION
+           ========================================================================== -->
+        <section class="section" id="about">
+            <div class="container about-grid-3">
+                <!-- Column 1: Portrait Photo -->
+                <div class="reveal">
+                    <div class="about-photo-container">
+                        <img src="img/adel_new.jpg" alt="عادل مقدمي - متخصص في إدارة الإعلانات الرقمية والتسويق بالأداء"
+                            class="about-profile-img">
+                    </div>
+                </div>
+
+                <!-- Column 2: Profile Biography -->
+                <div class="reveal delay-1">
+                    <span class="section-label" data-i18n="about_label">نبذة عني</span>
+                    <h2 class="section-title" style="display:block;" data-i18n="about_title">من هو عادل مقدمي؟</h2>
+                    <div class="about-text">
+                        <p data-i18n="about_p1">أنا <strong>عادل مقدمي</strong>، متخصص مستقل في إدارة الإعلانات الرقمية والتسويق بالأداء.</p>
+                        <p data-i18n="about_p2">أعمل على بناء الحملات الإعلانية بطريقة منظمة تبدأ بفهم النشاط التجاري والجمهور والسوق، ثم
+                            تحويل هذه المعطيات إلى استراتيجية إعلانية قابلة للتنفيذ والقياس والتحسين.</p>
+                        <p data-i18n="about_p3">أؤمن أن نجاح الإعلان لا يعتمد على زيادة الميزانية فقط، بل على فهم العميل، والمنتج، والعرض،
+                            والرسالة الإعلانية، ثم استخدام البيانات لاتخاذ قرارات أكثر دقة.</p>
+                        <p data-i18n="about_p4">أركز على تطوير عملي في <strong>الأسواق الخليجية</strong> ومساعدة الشركات والعلامات التجارية
+                            على بناء عمليات إعلانية أكثر وضوحًا وقابلية للقياس والتحسين.</p>
+                    </div>
+
+                    <div class="about-highlights">
+                        <div class="about-highlight-card">
+                            <span class="about-highlight-icon">🎯</span>
+                            <div class="about-highlight-details">
+                                <h4 data-i18n="about_hl_title1">التخصص الرئيسي</h4>
+                                <p data-i18n="about_hl_desc1">إدارة الحملات والتسويق بالأداء</p>
+                            </div>
+                        </div>
+                        <div class="about-highlight-card">
+                            <span class="about-highlight-icon">🌍</span>
+                            <div class="about-highlight-details">
+                                <h4 data-i18n="about_hl_title2">نطاق العمل</h4>
+                                <p data-i18n="about_hl_desc2">دول الخليج والأسواق الدولية</p>
+                            </div>
+                        </div>
+                        <div class="about-highlight-card">
+                            <span class="about-highlight-icon">📊</span>
+                            <div class="about-highlight-details">
+                                <h4 data-i18n="about_hl_title3">المنهجية المعتمدة</h4>
+                                <p data-i18n="about_hl_desc3">قرارات قائمة على تحليل البيانات</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Column 3: Work Process -->
+                <div class="reveal delay-2">
+                    <div class="about-process">
+                        <h3
+                            style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.75rem;" data-i18n="about_process_title">
+                            آلية العمل الإعلاني</h3>
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <span class="process-icon">1</span>
+                                <div class="process-details">
+                                    <h4 data-i18n="about_proc_t1">البيانات (Data)</h4>
+                                    <p data-i18n="about_proc_d1">جمع وتحليل البيانات لفهم الوضع الحالي ونقاط القوة والضعف.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <span class="process-icon">2</span>
+                                <div class="process-details">
+                                    <h4 data-i18n="about_proc_t2">الاستراتيجية (Strategy)</h4>
+                                    <p data-i18n="about_proc_d2">بناء استراتيجية مخصصة للنشاط التجاري والجمهور المستهدف.</p>
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <span class="process-icon">3</span>
+                                <div class="process-details">
+                                    <h4 data-i18n="about_proc_t3">التحسين (Optimization)</h4>
+                                    <p data-i18n="about_proc_d3">مراقبة مستمرة للحملات الإعلانية وضبطها لزيادة الكفاءة.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SERVICES SECTION
+           ========================================================================== */ -->
+        <section class="section" id="services">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="serv_header_label">خدماتي</span>
+                    <h2 class="section-title" data-i18n="serv_header_title">ماذا أقدم لنشاطك التجاري؟</h2>
+                    <p class="section-subtitle" data-i18n="serv_header_subtitle">أبني وأدير الحملات الإعلانية بما يتناسب مع طبيعة النشاط التجاري والهدف
+                        المطلوب، من التخطيط والإطلاق إلى القياس والتحسين.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="service-card reveal">
+                        <div class="service-card-header">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <circle cx="12" cy="12" r="6"></circle>
+                                    <circle cx="12" cy="12" r="2"></circle>
+                                </svg>
+                            </div>
+                            <div class="service-num">01</div>
+                        </div>
+                        <h3 class="service-title" data-i18n="srv1_title">إدارة الحملات الإعلانية</h3>
+                        <p class="service-desc" data-i18n="srv1_desc">إعداد وإدارة وتحسين الحملات الإعلانية عبر المنصات الرقمية المختلفة، مع
+                            التركيز على الهدف التجاري ومؤشرات الأداء.</p>
+                        <div class="service-benefit">
+                            <span class="benefit-label" data-i18n="benefit_label">الفائدة للمشروع:</span> <span data-i18n="srv1_benefit">زيادة الوصول والظهور أمام الجمهور
+                            المناسب بأعلى كفاءة وأقل تكلفة.</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal delay-1">
+                        <div class="service-card-header">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                    <line x1="2" y1="20" x2="22" y2="20"></line>
+                                </svg>
+                            </div>
+                            <div class="service-num">02</div>
+                        </div>
+                        <h3 class="service-title" data-i18n="srv2_title">التسويق بالأداء</h3>
+                        <p class="service-desc" data-i18n="srv2_desc">بناء استراتيجية إعلانية تركز على رحلة العميل كاملة، من ظهور الإعلان وحتى
+                            التفاعل والطلب والشراء.</p>
+                        <div class="service-benefit">
+                            <span class="benefit-label" data-i18n="benefit_label">الفائدة للمشروع:</span> <span data-i18n="srv2_benefit">تحويل الميزانية الإعلانية إلى نتائج
+                            ملموسة ومبيعات قابلة للنمو والتوسع.</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div class="service-card-header">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                            </div>
+                            <div class="service-num">03</div>
+                        </div>
+                        <h3 class="service-title" data-i18n="srv3_title">التتبع وقياس التحويلات</h3>
+                        <p class="service-desc" data-i18n="srv3_desc">إعداد أدوات القياس والتتبع لفهم مصادر النتائج وسلوك العملاء وقياس
+                            التحويلات بشكل أفضل.</p>
+                        <div class="service-benefit">
+                            <span class="benefit-label" data-i18n="benefit_label">الفائدة للمشروع:</span> <span data-i18n="srv3_benefit">معرفة دقيقة لمصدر كل ريال يتم إنفاقه
+                            وتتبع مسار الشراء بدقة 100%.</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal delay-1">
+                        <div class="service-card-header">
+                            <div class="service-icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                            </div>
+                            <div class="service-num">04</div>
+                        </div>
+                        <h3 class="service-title" data-i18n="srv4_title">تحليل البيانات وتحسين الأداء</h3>
+                        <p class="service-desc" data-i18n="srv4_desc">تحليل مؤشرات الحملات لاكتشاف ما يعمل وما يحتاج إلى تطوير، ثم اتخاذ
+                            قرارات التحسين بناءً على البيانات.</p>
+                        <div class="service-benefit">
+                            <span class="benefit-label" data-i18n="benefit_label">الفائدة للمشروع:</span> <span data-i18n="srv4_benefit">إيقاف الهدر المالي فورًا وتوجيه
+                            الميزانية نحو الحملات الأكثر ربحية.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           ADVERTISING PLATFORMS SECTION
+           ========================================================================== -->
+        <section class="section" id="platforms">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="platform_label">المنصات الإعلانية</span>
+                    <h2 class="section-title" data-i18n="platform_title">المنصات التي أعمل عليها</h2>
+                    <p class="section-subtitle" data-i18n="platform_subtitle">لا أختار المنصة لمجرد شهرتها، بل وفقًا لطبيعة النشاط والجمهور والهدف
+                        الإعلاني.</p>
+                </div>
+
+                <div class="platform-container reveal">
+                    <!-- Platform Tabs buttons -->
+                    <div class="platform-grid">
+                        <button class="platform-tab-btn active" data-platform="meta">
+                            <span data-i18n="plat_meta">فيسبوك وانستغرام</span>
+                        </button>
+                        <button class="platform-tab-btn" data-platform="google">
+                            <span data-i18n="plat_google">جوجل ويوتيوب</span>
+                        </button>
+                        <button class="platform-tab-btn" data-platform="tiktok">
+                            <span data-i18n="plat_tiktok">تيك توك</span>
+                        </button>
+                        <button class="platform-tab-btn" data-platform="snapchat">
+                            <span data-i18n="plat_snap">سناب شات</span>
+                        </button>
+                    </div>
+
+                    <!-- Platform Detail content cards -->
+                    <div class="platform-content-box">
+                        <!-- Meta Panel -->
+                        <div class="platform-panel active" id="platform-meta">
+                            <div class="platform-panel-header">
+                                <h3 class="platform-panel-title">Meta (Facebook & Instagram)</h3>
+                                <span class="platform-panel-icon">📱</span>
+                            </div>
+                            <ul class="platform-capabilities-list">
+                                <li class="platform-capability-item" data-i18n="plat_meta_1">إنشاء وإعداد الحملات الإعلانية المتقدمة</li>
+                                <li class="platform-capability-item" data-i18n="plat_meta_2">استهداف شرائح دقيقة من الجماهير (Audience Targeting)</li>
+                                <li class="platform-capability-item" data-i18n="plat_meta_3">إعادة استهداف المهتمين (Retargeting)</li>
+                                <li class="platform-capability-item" data-i18n="plat_meta_4">اختبار الأفكار والمحتوى الإعلاني (Creative Testing)</li>
+                                <li class="platform-capability-item" data-i18n="plat_meta_5">اختبار شرائح الجماهير ومجموعات الإعلانات (Audience Testing)</li>
+                                <li class="platform-capability-item" data-i18n="plat_meta_6">تحسين الأداء بشكل دوري لخفض تكلفة التحويل</li>
+                                <li class="platform-capability-item" data-i18n="plat_meta_7">تحليل سلوك العملاء وقمع المبيعات (Conversion Analysis)</li>
+                            </ul>
+                        </div>
+
+                        <!-- Google Panel -->
+                        <div class="platform-panel" id="platform-google">
+                            <div class="platform-panel-header">
+                                <h3 class="platform-panel-title">Google & YouTube</h3>
+                                <span class="platform-panel-icon">🔍</span>
+                            </div>
+                            <ul class="platform-capabilities-list">
+                                <li class="platform-capability-item" data-i18n="plat_goo_1">إعلانات شبكة البحث (Search Ads)</li>
+                                <li class="platform-capability-item" data-i18n="plat_goo_2">إعلانات الشبكة الإعلانية (Display Ads)</li>
+                                <li class="platform-capability-item" data-i18n="plat_goo_3">إعلانات يوتيوب المرئية (YouTube Ads)</li>
+                                <li class="platform-capability-item" data-i18n="plat_goo_4">حملات الأداء الأقصى الذكية (Performance Max)</li>
+                                <li class="platform-capability-item" data-i18n="plat_goo_5">البحث وتحديد الكلمات المفتاحية الأكثر ربحية</li>
+                                <li class="platform-capability-item" data-i18n="plat_goo_6">إعادة استهداف الزوار السابقين للموقع</li>
+                                <li class="platform-capability-item" data-i18n="plat_goo_7">إعداد أدوات تتبع قياس التحويلات المتقدمة</li>
+                            </ul>
+                        </div>
+
+                        <!-- TikTok Panel -->
+                        <div class="platform-panel" id="platform-tiktok">
+                            <div class="platform-panel-header">
+                                <h3 class="platform-panel-title">TikTok</h3>
+                                <span class="platform-panel-icon">🎵</span>
+                            </div>
+                            <ul class="platform-capabilities-list">
+                                <li class="platform-capability-item" data-i18n="plat_tik_1">إعداد وهيكلة الحملات عبر TikTok Ads Manager</li>
+                                <li class="platform-capability-item" data-i18n="plat_tik_2">استهداف الفئات الشبابية والاهتمامات الدقيقة</li>
+                                <li class="platform-capability-item" data-i18n="plat_tik_3">اختبار المحتوى الإعلاني المخصص للتيك توك</li>
+                                <li class="platform-capability-item" data-i18n="plat_tik_4">إطلاق حملات تجميع بيانات العملاء (Lead Generation)
+                                </li>
+                                <li class="platform-capability-item" data-i18n="plat_tik_5">حملات زيادة المبيعات والتحويل للمتاجر الإلكترونية
+                                </li>
+                                <li class="platform-capability-item" data-i18n="plat_tik_6">إعادة استهداف المتفاعلين ومشاهدي الفيديوهات</li>
+                                <li class="platform-capability-item" data-i18n="plat_tik_7">تحليل أداء الفيديو والاحتفاظ بالمشاهدين</li>
+                            </ul>
+                        </div>
+
+                        <!-- Snapchat Panel -->
+                        <div class="platform-panel" id="platform-snapchat">
+                            <div class="platform-panel-header">
+                                <h3 class="platform-panel-title">Snapchat</h3>
+                                <span class="platform-panel-icon">👻</span>
+                            </div>
+                            <ul class="platform-capabilities-list">
+                                <li class="platform-capability-item" data-i18n="plat_snap_1">إعداد وتطوير الحملات الإعلانية في الخليج</li>
+                                <li class="platform-capability-item" data-i18n="plat_snap_2">استهداف ديموغرافي وجغرافي متقدم</li>
+                                <li class="platform-capability-item" data-i18n="plat_snap_3">حملات جذب العملاء الجدد (Customer Acquisition)</li>
+                                <li class="platform-capability-item" data-i18n="plat_snap_4">حملات إعادة الاستهداف المخصصة لسناب</li>
+                                <li class="platform-capability-item" data-i18n="plat_snap_5">اختبار التصاميم والفيديوهات القصيرة</li>
+                                <li class="platform-capability-item" data-i18n="plat_snap_6">تحسين الميزانيات وتحقيق نتائج إعلانية فعالة</li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                    <p class="platform-message" data-i18n="plat_msg">« لا أختار المنصة لمجرد شهرتها، بل وفقًا لطبيعة النشاط والجمهور والهدف
+                        الإعلاني. »</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           PERFORMANCE MARKETING & CUSTOMER JOURNEY
+           ========================================================================== -->
+        <section class="section" id="journey">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="journey_label">التسويق بالأداء</span>
+                    <h2 class="section-title" data-i18n="journey_title">الإعلان ليس مجرد وسيلة لجلب الزيارات.</h2>
+                    <p class="section-subtitle" data-i18n="journey_subtitle">أتعامل مع الإعلانات الرقمية كعملية متكاملة تهدف إلى فهم وتتبع رحلة
+                        العميل بالكامل لضمان أفضل استثمار للميزانية الإعلانية.</p>
+                </div>
+
+                <div class="journey-container reveal">
+                    <h3 style="text-align: center; margin-bottom: 2rem;" data-i18n="journey_funnel_title">رحلة العميل الإعلانية (Customer Journey)</h3>
+
+                    <div class="journey-funnel-wrapper">
+                        <div class="journey-funnel">
+                            <div class="journey-node">
+                                <div class="journey-dot-outer">
+                                    <div class="journey-dot-inner">01</div>
+                                </div>
+                                <span class="journey-node-title" data-i18n="funnel_n1_t">الإعلان</span>
+                                <span class="journey-node-desc" data-i18n="funnel_n1_d">الظهور للمستهدف</span>
+                            </div>
+                            <div class="journey-node">
+                                <div class="journey-dot-outer">
+                                    <div class="journey-dot-inner">02</div>
+                                </div>
+                                <span class="journey-node-title" data-i18n="funnel_n2_t">الاهتمام</span>
+                                <span class="journey-node-desc" data-i18n="funnel_n2_d">تفاعل الجمهور</span>
+                            </div>
+                            <div class="journey-node">
+                                <div class="journey-dot-outer">
+                                    <div class="journey-dot-inner">03</div>
+                                </div>
+                                <span class="journey-node-title" data-i18n="funnel_n3_t">الزيارة</span>
+                                <span class="journey-node-desc" data-i18n="funnel_n3_d">الدخول للهبوط</span>
+                            </div>
+                            <div class="journey-node">
+                                <div class="journey-dot-outer">
+                                    <div class="journey-dot-inner">04</div>
+                                </div>
+                                <span class="journey-node-title" data-i18n="funnel_n4_t">التفاعل</span>
+                                <span class="journey-node-desc" data-i18n="funnel_n4_d">تصفح وتفقد المعروض</span>
+                            </div>
+                            <div class="journey-node">
+                                <div class="journey-dot-outer">
+                                    <div class="journey-dot-inner">05</div>
+                                </div>
+                                <span class="journey-node-title" data-i18n="funnel_n5_t">الطلب</span>
+                                <span class="journey-node-desc" data-i18n="funnel_n5_d">إضافة للسلة</span>
+                            </div>
+                            <div class="journey-node">
+                                <div class="journey-dot-outer">
+                                    <div class="journey-dot-inner">06</div>
+                                </div>
+                                <span class="journey-node-title" data-i18n="funnel_n6_t">الشراء</span>
+                                <span class="journey-node-desc" data-i18n="funnel_n6_d">إتمام الدفع</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="marketing-principles-list">
+                        <div class="principle-item-box">
+                            <h4 data-i18n="principle_1_t">دراسة شاملة قبل التشغيل</h4>
+                            <p data-i18n="principle_1_d">أقوم بتحليل الجمهور المستهدف، ودراسة المنافسين في السوق، وفحص المنتج أو الخدمة، وتطوير
+                                العرض التسويقي لضمان جاذبية الإعلان وقوته.</p>
+                        </div>
+                        <div class="principle-item-box">
+                            <h4 data-i18n="principle_2_t">تحسين صفحات الهبوط ومحتوى الإعلان</h4>
+                            <p data-i18n="principle_2_d">صياغة الرسالة الإعلانية واختيار المحتوى الإعلاني المناسب بما يتوافق مع طبيعة صفحة الهبوط
+                                وتسهيل رحلة العميل لتحقيق أهداف الحملة المرجوة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           TRACKING, ANALYTICS & DATA ANALYSIS
+           ========================================================================== -->
+        <section class="section" id="analytics">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="analytics_label">التتبع والتحليلات</span>
+                    <h2 class="section-title" data-i18n="analytics_title">البيانات هي الأساس لاتخاذ قرارات أفضل</h2>
+                    <p class="section-subtitle" data-i18n="analytics_subtitle">بدون قياس دقيق لا يمكن تحقيق نمو مستدام. أحرص على إعداد بنية تتبع
+                        وتحليلات قوية تفهم مصادر النتائج وسلوك الزوار.</p>
+                </div>
+
+                <div class="reveal">
+                    <h3 style="text-align: center; margin-bottom: 1.5rem;" data-i18n="tracking_tech_title">التقنيات وأدوات التتبع التي أعدها</h3>
+                    <div class="tracking-tech-grid">
+                        <div class="tech-tag-card">Meta Pixel</div>
+                        <div class="tech-tag-card">Meta Events</div>
+                        <div class="tech-tag-card">Conversions API</div>
+                        <div class="tech-tag-card">Google Tag Manager</div>
+                        <div class="tech-tag-card">Google Analytics</div>
+                        <div class="tech-tag-card">Conversion Tracking</div>
+                        <div class="tech-tag-card">UTM Campaign Tracking</div>
+                        <div class="tech-tag-card">KPI Analysis</div>
+                    </div>
+                    <p
+                        style="text-align: center; font-size: 1.15rem; margin-top: 2rem; color: var(--accent-secondary); font-weight: 600;" data-i18n="tracking_goal">
+                        التتبع يهدف للإجابة على: من أين جاء العميل؟ ماذا فعل؟ وأين حدث التحويل؟</p>
+                </div>
+
+                <!-- Data Analysis & KPIs -->
+                <div class="kpi-board reveal">
+                    <h3 style="text-align: center; margin-bottom: 2rem;" data-i18n="kpi_board_title">مؤشرات الأداء الرئيسية التي يتم تحليلها (KPIs)
+                    </h3>
+                    <div class="kpi-board-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">CPM</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_cpm_t">تكلفة كل ألف ظهور</h4>
+                            <p class="kpi-desc" data-i18n="kpi_cpm_d">يقيس تكلفة عرض الإعلان لألف مرة للجمهور المستهدف.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">CTR</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_ctr_t">نسبة النقر للظهور</h4>
+                            <p class="kpi-desc" data-i18n="kpi_ctr_d">يقيس مدى اهتمام الجمهور وتفاعله مع محتوى الإعلان والضغط عليه.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">CPC</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_cpc_t">تكلفة النقرة الواحدة</h4>
+                            <p class="kpi-desc" data-i18n="kpi_cpc_d">يقيس التكلفة الفعلية لكل زائر يضغط على رابط الإعلان.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">CPL</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_cpl_t">تكلفة العميل المحتمل</h4>
+                            <p class="kpi-desc" data-i18n="kpi_cpl_d">التكلفة المدفوعة مقابل الحصول على بيانات عميل مهتم بالخدمات.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">CPA</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_cpa_t">تكلفة الاكتساب</h4>
+                            <p class="kpi-desc" data-i18n="kpi_cpa_d">التكلفة المدفوعة مقابل تحقيق عملية بيع أو حدث تحويل نهائي.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">CR</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_cr_t">معدل التحويل</h4>
+                            <p class="kpi-desc" data-i18n="kpi_cr_d">نسبة الزوار الذين يقومون بالفعل بالتحويل المطلوب في الموقع.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">ROAS</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_roas_t">العائد على الإنفاق الإعلاني</h4>
+                            <p class="kpi-desc" data-i18n="kpi_roas_d">معدل العائد المادي المحقق من ميزانيات الإعلانات المدفوعة.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-header">
+                                <span class="kpi-name">Revenue</span>
+                                <span class="kpi-status-dot"></span>
+                            </div>
+                            <h4 class="kpi-title" data-i18n="kpi_rev_t">الإيرادات والزيارات</h4>
+                            <p class="kpi-desc" data-i18n="kpi_rev_d">إجمالي المبيعات وقيمة الأرباح المحققة بعد تشغيل الإعلانات.</p>
+                            <span class="kpi-footer-line"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-flow-card reveal">
+                    <h4 class="analysis-flow-title" data-i18n="flow_title">البيانات لا تخبرنا فقط بما حدث، بل تساعدنا على فهم السبب من خلال
+                        دورة التحليل:</h4>
+                    <div class="analysis-flow-steps">
+                        <div class="analysis-flow-step" data-i18n="flow_s1">ما الذي يعمل؟</div>
+                        <span class="analysis-flow-arrow">←</span>
+                        <div class="analysis-flow-step" data-i18n="flow_s2">ما الذي لا يعمل؟</div>
+                        <span class="analysis-flow-arrow">←</span>
+                        <div class="analysis-flow-step" data-i18n="flow_s3">لماذا؟</div>
+                        <span class="analysis-flow-arrow">←</span>
+                        <div class="analysis-flow-step" data-i18n="flow_s4">ماذا يجب أن نغيّر؟</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           METHODOLOGY SECTION
+           ========================================================================== -->
+        <section class="section" id="methodology">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="meth_label">منهجية العمل</span>
+                    <h2 class="section-title" data-i18n="meth_title">8 خطوات لبناء عملية إعلانية مستقرة</h2>
+                    <p class="section-subtitle" data-i18n="meth_subtitle">أتبع نهجًا منهجيًا وعلميًا في بناء وتتبع وتطوير الحملات الإعلانية لضمان
+                        تقليص الهدر المالي ورفع كفاءة الحملات.</p>
+                </div>
+
+                <div class="methodology-timeline">
+                    <!-- Step 1 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s1_n">الخطوة 01</span>
+                            <h3 class="timeline-title" data-i18n="meth_s1_t">فهم النشاط التجاري</h3>
+                            <p class="timeline-desc" data-i18n="meth_s1_d">فهم المنتج أو الخدمة المعروضة، طبيعة عمل النشاط التجاري، تحديد
+                                السوق المستهدف، وتوضيح الهدف التجاري المطلوب بدقة.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s2_n">الخطوة 02</span>
+                            <h3 class="timeline-title" data-i18n="meth_s2_t">دراسة السوق والجمهور</h3>
+                            <p class="timeline-desc" data-i18n="meth_s2_d">دراسة وفهم سلوك واحتياجات ومخاوف العملاء المحتملين، إلى جانب فحص
+                                استراتيجيات وعروض المنافسين في نفس القطاع.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s3_n">الخطوة 03</span>
+                            <h3 class="timeline-title" data-i18n="meth_s3_t">بناء الاستراتيجية</h3>
+                            <p class="timeline-desc" data-i18n="meth_s3_d">تحديد أهداف ومؤشرات نجاح الحملة، صياغة الرسائل الإعلانية المناسبة،
+                                وتخطيط طريقة توزيع الميزانيات على القنوات والمنصات.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s4_n">الخطوة 04</span>
+                            <h3 class="timeline-title" data-i18n="meth_s4_t">إطلاق الحملات</h3>
+                            <p class="timeline-desc" data-i18n="meth_s4_d">إعداد الحملات والجمهور وتركيب أكواد التتبع (Pixel / APIs) والتحقق
+                                من صحتها، ثم إطلاق الحملات بطريقة منظمة.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s5_n">الخطوة 05</span>
+                            <h3 class="timeline-title" data-i18n="meth_s5_t">الاختبار (A/B Testing)</h3>
+                            <p class="timeline-desc" data-i18n="meth_s5_d">اختبار وتجربة زوايا إعلانية مختلفة، العناوين، الصور، مقاطع الفيديو،
+                                شرائح الجماهير، والرسائل لمعرفة ما يحقق أفضل استجابة.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s6_n">الخطوة 06</span>
+                            <h3 class="timeline-title" data-i18n="meth_s6_t">تحليل النتائج</h3>
+                            <p class="timeline-desc" data-i18n="meth_s6_d">مراقبة البيانات اليومية وتفسيرها ومقارنة التكاليف الفردية للتحويلات
+                                بمؤشرات النجاح المستهدفة.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 7 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s7_n">الخطوة 07</span>
+                            <h3 class="timeline-title" data-i18n="meth_s7_t">التحسين (Optimization)</h3>
+                            <p class="timeline-desc" data-i18n="meth_s7_d">تطوير أو إيقاف العناصر ضعيفة الأداء، إعادة توزيع الميزانيات لصالح
+                                الجماهير والإعلانات الناجحة وفقًا للبيانات الفعلية.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 8 -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-num" data-i18n="meth_s8_n">الخطوة 08</span>
+                            <h3 class="timeline-title" data-i18n="meth_s8_t">التوسع (Scaling)</h3>
+                            <p class="timeline-desc" data-i18n="meth_s8_d">عند الوصول لمؤشرات أداء مستقرة ومرضية، يتم زيادة الإنفاق المالي
+                                تدريجيًا لتوسيع نطاق المبيعات مع مراقبة كفاءة الحملة.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SPECIALIZATION & COMPETENCIES SECTION
+           ========================================================================== -->
+        <section class="section" id="skills">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="skills_label">مجالات الخبرة</span>
+                    <h2 class="section-title" data-i18n="skills_title">الكفاءات والممارسات الاحترافية</h2>
+                    <p class="section-subtitle" data-i18n="skills_subtitle">المهارات التسويقية والتحليلية التي أعتمد عليها في إدارة ونجاح الحملات
+                        الرقمية.</p>
+                </div>
+
+                <div class="spec-grid">
+                    <!-- Category 1 -->
+                    <div class="spec-category-card reveal">
+                        <h3 class="spec-category-title" data-i18n="cat1_title">استراتيجية الإعلانات (Advertising Strategy)</h3>
+                        <div class="spec-skills-list">
+                            <span class="spec-skill-tag" data-i18n="cat1_s1">إعداد الحملات الاستراتيجية</span>
+                            <span class="spec-skill-tag" data-i18n="cat1_s2">دراسة وتحليل الجمهور</span>
+                            <span class="spec-skill-tag" data-i18n="cat1_s3">تخطيط قنوات الإعلانات</span>
+                            <span class="spec-skill-tag" data-i18n="cat1_s4">هيكلة وتوزيع الميزانية</span>
+                            <span class="spec-skill-tag" data-i18n="cat1_s5">Media Planning</span>
+                            <span class="spec-skill-tag" data-i18n="cat1_s6">صياغة العروض التسويقية</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="spec-category-card reveal delay-1">
+                        <h3 class="spec-category-title" data-i18n="cat2_title">المنصات المدفوعة (Paid Media)</h3>
+                        <div class="spec-skills-list">
+                            <span class="spec-skill-tag" data-i18n="cat2_s1">إعلانات Meta (فيسبوك وانستغرام)</span>
+                            <span class="spec-skill-tag" data-i18n="cat2_s2">إعلانات Google</span>
+                            <span class="spec-skill-tag" data-i18n="cat2_s3">إعلانات YouTube</span>
+                            <span class="spec-skill-tag" data-i18n="cat2_s4">إعلانات TikTok</span>
+                            <span class="spec-skill-tag" data-i18n="cat2_s5">إعلانات Snapchat</span>
+                            <span class="spec-skill-tag" data-i18n="cat2_s6">إعلانات LinkedIn</span>
+                            <span class="spec-skill-tag" data-i18n="cat2_s7">إعلانات Pinterest</span>
+                            <span class="spec-skill-tag" data-i18n="cat2_s8">إعلانات X</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="spec-category-card reveal">
+                        <h3 class="spec-category-title" data-i18n="cat3_title">التسويق بالأداء (Performance Marketing)</h3>
+                        <div class="spec-skills-list">
+                            <span class="spec-skill-tag" data-i18n="cat3_s1">جذب العملاء المحتملين (Lead Generation)</span>
+                            <span class="spec-skill-tag" data-i18n="cat3_s2">حملات تحويل المبيعات</span>
+                            <span class="spec-skill-tag" data-i18n="cat3_s3">إعادة الاستهداف الذكية</span>
+                            <span class="spec-skill-tag" data-i18n="cat3_s4">تحسين تكلفة الاكتساب</span>
+                            <span class="spec-skill-tag" data-i18n="cat3_s5">Customer Acquisition</span>
+                            <span class="spec-skill-tag" data-i18n="cat3_s6">اختبار العناوين والصور</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 4 -->
+                    <div class="spec-category-card reveal delay-1">
+                        <h3 class="spec-category-title" data-i18n="cat4_title">التتبع والتحليلات (Analytics & Tracking)</h3>
+                        <div class="spec-skills-list">
+                            <span class="spec-skill-tag" data-i18n="cat4_s1">قياس وإعداد التحويلات</span>
+                            <span class="spec-skill-tag" data-i18n="cat4_s2">تركيب Meta Pixel</span>
+                            <span class="spec-skill-tag" data-i18n="cat4_s3">إعداد Conversions API</span>
+                            <span class="spec-skill-tag" data-i18n="cat4_s4">Google Tag Manager</span>
+                            <span class="spec-skill-tag" data-i18n="cat4_s5">Google Analytics 4</span>
+                            <span class="spec-skill-tag" data-i18n="cat4_s6">تتبع روابط UTM</span>
+                            <span class="spec-skill-tag" data-i18n="cat4_s7">تحليل مؤشرات الأداء (KPIs)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           CASE STUDY SECTION
+           ========================================================================== -->
+        <section class="section" id="case-study">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="case_label">نموذج مشروع إعلاني</span>
+                    <h2 class="section-title" data-i18n="case_title">محاكاة عملية لاستراتيجية إدارة الحملات</h2>
+                    <p class="section-subtitle" data-i18n="case_subtitle">يوضح هذا النموذج الافتراضي كيف أتعامل مع المشكلات والتحديات التسويقية
+                        لتحقيق المبيعات.</p>
+                </div>
+
+                <div class="case-study-card reveal">
+                    <span class="case-study-badge" data-i18n="case_badge">دراسة حالة تجريبية</span>
+                    <h3 class="case-study-title" data-i18n="case_store_title">متجر إلكتروني في المملكة العربية السعودية</h3>
+
+                    <div class="case-study-meta-grid">
+                        <div class="case-study-meta-item">
+                            <span class="case-study-meta-label" data-i18n="case_m1_l">القطاع</span>
+                            <span class="case-study-meta-value" data-i18n="case_m1_v">E-commerce (التجارة الإلكترونية)</span>
+                        </div>
+                        <div class="case-study-meta-item">
+                            <span class="case-study-meta-value" data-i18n="case_m2_v">المملكة العربية السعودية</span>
+                            <span class="case-study-meta-label" data-i18n="case_m2_l">السوق المستهدف</span>
+                        </div>
+                        <div class="case-study-meta-item">
+                            <span class="case-study-meta-label" data-i18n="case_m3_l">الهدف الأساسي</span>
+                            <span class="case-study-meta-value" data-i18n="case_m3_v">زيادة المبيعات والتحويلات</span>
+                        </div>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div class="case-study-disclaimer">
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <span data-i18n="case_disc">هذا نموذج تجريبي يوضح طريقة التفكير والاستراتيجية، وليس مشروعًا لعميل حقيقي ولا يتضمن
+                            نتائج فعلية.</span>
+                    </div>
+
+                    <div class="case-study-details-grid">
+                        <!-- Column 1: Challenge & Objectives -->
+                        <div class="case-study-challenge-box">
+                            <div class="challenge-section">
+                                <h4 data-i18n="case_chal_t">التحدي (The Challenge)</h4>
+                                <p data-i18n="case_chal_d">متجر إلكتروني يواجه صعوبة في الوصول إلى عملاء جدد وتحقيق مبيعات مستقرة، ويريد استخدام
+                                    الإعلانات الرقمية لبناء قناة مبيعات منظمة وقابلة للقياس والتحسين وزيادة معدل
+                                    التحويل.</p>
+                            </div>
+
+                            <div class="objectives-section" style="margin-top: 2rem;">
+                                <h4 data-i18n="case_obj_t">الأهداف المستهدفة (The Objectives)</h4>
+                                <ul class="case-study-objectives-list"
+                                    style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+                                    <li
+                                        style="display:flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); font-size: 0.95rem;">
+                                        <span style="color: var(--accent-secondary); font-weight: bold;">✔</span>
+                                        <span data-i18n="case_obj_1">إعداد وتفعيل بنية تتبع وتحليلات متكاملة بنسبة 100%.</span>
+                                    </li>
+                                    <li
+                                        style="display:flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); font-size: 0.95rem;">
+                                        <span style="color: var(--accent-secondary); font-weight: bold;">✔</span>
+                                        <span data-i18n="case_obj_2">خفض تكلفة اكتساب العميل الجديد (CPA) مع زيادة حجم المبيعات.</span>
+                                    </li>
+                                    <li
+                                        style="display:flex; align-items: center; gap: 0.75rem; color: var(--text-secondary); font-size: 0.95rem;">
+                                        <span style="color: var(--accent-secondary); font-weight: bold;">✔</span>
+                                        <span data-i18n="case_obj_3">تحسين وتطوير معدل التحويل (Conversion Rate) لصفحات الهبوط.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Funnel Visualization -->
+                        <div class="funnel-container">
+                            <h4 class="funnel-title" data-i18n="case_funnel_t">هيكل قمع مبيعات المتجر (Sales Funnel Model)</h4>
+                            <div class="funnel-visual">
+                                <div class="funnel-stage stage-1"><span class="stage-label" data-i18n="case_f1_l">الظهور
+                                        (Impression)</span><span class="stage-percent">100%</span></div>
+                                <div class="funnel-stage stage-2"><span class="stage-label" data-i18n="case_f2_l">النقرات (Click)</span><span
+                                        class="stage-percent">2% - 3%</span></div>
+                                <div class="funnel-stage stage-3"><span class="stage-label" data-i18n="case_f3_l">زيارة المتجر (Store
+                                        Visit)</span><span class="stage-percent" data-i18n="case_f3_p">80% من النقرات</span></div>
+                                <div class="funnel-stage stage-4"><span class="stage-label" data-i18n="case_f4_l">إضافة للسلة (Add to
+                                        Cart)</span><span class="stage-percent">5% - 8%</span></div>
+                                <div class="funnel-stage stage-5"><span class="stage-label" data-i18n="case_f5_l">بدء الدفع
+                                        (Checkout)</span><span class="stage-percent">3% - 4%</span></div>
+                                <div class="funnel-stage stage-6"><span class="stage-label" data-i18n="case_f6_l">الشراء النهائي
+                                        (Purchase)</span><span class="stage-percent">1.5% - 2%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="case-study-strategy-wrapper" style="margin-top: 4rem;">
+                        <h4
+                            style="font-size: 1.35rem; margin-bottom: 2rem; text-align: center; color: var(--text-primary);" data-i18n="case_strat_t">
+                            خطوات الاستراتيجية المطبقة (The Strategy)</h4>
+                        <div class="case-study-phases">
+                            <!-- Phase 1 -->
+                            <div class="case-study-phase-card">
+                                <span class="case-study-phase-num" data-i18n="case_p1_n">المرحلة الأولى</span>
+                                <h5 class="case-study-phase-title" data-i18n="case_p1_t">الوصول لعملاء جدد</h5>
+                                <p class="case-study-phase-desc" data-i18n="case_p1_d">اختبار شرائح مختلفة من العملاء المحتملين وصياغة رسائل
+                                    تسويقية متعددة تناسب كل فئة.</p>
+                            </div>
+                            <!-- Phase 2 -->
+                            <div class="case-study-phase-card">
+                                <span class="case-study-phase-num" data-i18n="case_p2_n">المرحلة الثانية</span>
+                                <h5 class="case-study-phase-title" data-i18n="case_p2_t">اختبار الإعلانات</h5>
+                                <p class="case-study-phase-desc" data-i18n="case_p2_d">اختبار زوايا إعلانية مختلفة (صور، مقاطع فيديو، عناوين)
+                                    وتحديد الأفكار الأكثر جذباً وتأثيراً.</p>
+                            </div>
+                            <!-- Phase 3 -->
+                            <div class="case-study-phase-card">
+                                <span class="case-study-phase-num" data-i18n="case_p3_n">المرحلة الثالثة</span>
+                                <h5 class="case-study-phase-title" data-i18n="case_p3_t">إعادة الاستهداف</h5>
+                                <p class="case-study-phase-desc" data-i18n="case_p3_d">إعادة استهداف زوار المتجر والمهتمين الذين لم يكملوا
+                                    الشراء بعروض خاصة لحثهم على الشراء.</p>
+                            </div>
+                            <!-- Phase 4 -->
+                            <div class="case-study-phase-card">
+                                <span class="case-study-phase-num" data-i18n="case_p4_n">المرحلة الرابعة</span>
+                                <h5 class="case-study-phase-title" data-i18n="case_p4_t">التحسين المستمر</h5>
+                                <p class="case-study-phase-desc" data-i18n="case_p4_d">مراقبة رحلة العميل بالتفصيل وتحليل البيانات لمعالجة
+                                    المشاكل ونقاط الضعف في الهبوط والدفع.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           TARGET INDUSTRIES & MARKETS SECTION
+           ========================================================================== -->
+        <section class="section" id="markets">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="markets_label">القطاعات والأسواق</span>
+                    <h2 class="section-title" data-i18n="markets_title">أين أعمل ولمن أقدم خدماتي؟</h2>
+                    <p class="section-subtitle" data-i18n="markets_subtitle">أتعاون مع مختلف الشركات الخدمية والتجارية التي تسعى للنمو الرقمي في
+                        منطقة الخليج والعالم.</p>
+                </div>
+
+                <!-- Industries Grid -->
+                <div class="reveal" style="margin-bottom: 5rem;">
+                    <h3 style="text-align: center; margin-bottom: 2rem;" data-i18n="ind_title">القطاعات التي يمكنني العمل معها</h3>
+                    <div class="industries-grid">
+                        <div class="industry-card"><span class="industry-icon">🛒</span>
+                            <div class="industry-name" data-i18n="ind_1">المتاجر الإلكترونية</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">🏢</span>
+                            <div class="industry-name" data-i18n="ind_2">العقارات</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">🍔</span>
+                            <div class="industry-name" data-i18n="ind_3">المطاعم والضيافة</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">🩺</span>
+                            <div class="industry-name" data-i18n="ind_4">العيادات والمراكز الصحية</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">💄</span>
+                            <div class="industry-name" data-i18n="ind_5">التجميل والعناية</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">💪</span>
+                            <div class="industry-name" data-i18n="ind_6">اللياقة البدنية والصحة</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">📚</span>
+                            <div class="industry-name" data-i18n="ind_7">التعليم والتدريب</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">💻</span>
+                            <div class="industry-name" data-i18n="ind_8">الشركات التقنية (SaaS)</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">👔</span>
+                            <div class="industry-name" data-i18n="ind_9">الخدمات المهنية والاستشارية</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">📍</span>
+                            <div class="industry-name" data-i18n="ind_10">الشركات والخدمات المحلية</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">⭐</span>
+                            <div class="industry-name" data-i18n="ind_11">العلامات التجارية الشخصية</div>
+                        </div>
+                        <div class="industry-card"><span class="industry-icon">📞</span>
+                            <div class="industry-name" data-i18n="ind_12">شركات توليد العملاء (Lead Gen)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Markets List -->
+                <div class="markets-container reveal">
+                    <h3 data-i18n="markets_target_t">الأسواق المستهدفة حالياً</h3>
+                    <p style="color: var(--text-secondary); margin-top: 0.5rem;" data-i18n="markets_target_d">أركز بشكل أساسي على تقديم خدماتي للشركات والمشاريع في أمريكا، أوروبا، ومنطقة الخليج:</p>
+
+                    <div class="markets-grid">
+                        <div class="market-card">
+                            <span class="market-flag">🇺🇸</span>
+                            <span class="market-name" data-i18n="market_usa">أمريكا (USA)</span>
+                        </div>
+                        <div class="market-card">
+                            <span class="market-flag">🇪🇺</span>
+                            <span class="market-name" data-i18n="market_eur">أوروبا (Europe)</span>
+                        </div>
+                        <div class="market-card">
+                            <span class="market-flag">🌍</span>
+                            <span class="market-name" data-i18n="market_gcc">دول الخليج العربي (GCC)</span>
+                        </div>
+                    </div>
+
+                    <p class="markets-notice" data-i18n="markets_notice">« متاح للعمل عن بُعد مع الشركات في دول الخليج والأسواق الدولية. »</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           PRINCIPLES & WHY ADEl
+           ========================================================================== -->
+        <section class="section" id="principles">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="princ_label">ما أؤمن به</span>
+                    <h2 class="section-title" data-i18n="princ_title">فلسفة عملي التسويقي</h2>
+                    <p class="section-subtitle" data-i18n="princ_subtitle">المبادئ والقواعد الأساسية التي ألتزم بها لضمان تقديم عمل احترافي يركز
+                        على تحقيق الأهداف التجارية للعميل.</p>
+                </div>
+
+                <div class="principles-grid reveal">
+                    <div class="principle-card">
+                        <h3 class="principle-title" data-i18n="princ1_t">العميل أولًا</h3>
+                        <p class="principle-desc" data-i18n="princ1_d">من هو العميل؟ وما هي المشكلة الحقيقية التي نحلها له؟ نبدأ دائمًا من
+                            فهم تفاصيل سلوكه.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h3 class="principle-title" data-i18n="princ2_t">العرض والرسالة</h3>
+                        <p class="principle-desc" data-i18n="princ2_d">لماذا سيهتم العميل بالمنتج؟ ولماذا يختار هذا العرض دوناً عن غيره من
+                            المنافسين؟</p>
+                    </div>
+                    <div class="principle-card">
+                        <h3 class="principle-title" data-i18n="princ3_t">البيانات</h3>
+                        <p class="principle-desc" data-i18n="princ3_d">ماذا تخبرنا الأرقام والإحصائيات بعد إطلاق الحملات؟ نقرأ البيانات لنحدد
+                            الخطوة القادمة.</p>
+                    </div>
+                    <div class="principle-card">
+                        <h3 class="principle-title" data-i18n="princ4_t">التحسين المستمر</h3>
+                        <p class="principle-desc" data-i18n="princ4_d">الإعلان عملية مستمرة ودورة لا تنتهي من الاختبار والتحليل والتطوير
+                            اليومي لزيادة الكفاءة.</p>
+                    </div>
+                </div>
+
+                <div class="principles-conclusion reveal">
+                    <span data-i18n="princ_conclusion">التفكير التسويقي + فهم الجمهور + تحليل البيانات + التحسين المستمر</span>
+                </div>
+
+                <!-- Why Adel section -->
+                <div style="margin-top: 6rem;">
+                    <div class="section-header reveal">
+                        <span class="section-label" data-i18n="why_label">لماذا أنا؟</span>
+                        <h3 class="section-title" data-i18n="why_title">لماذا تتعامل مع عادل مقدمي؟</h3>
+                    </div>
+
+                    <div class="why-grid">
+                        <div class="why-card reveal">
+                            <h4 class="why-title" data-i18n="why1_t">التفكير المبني على البيانات</h4>
+                            <p class="why-desc" data-i18n="why1_d">اتخاذ القرارات وتعديل الحملات الإعلانية بناءً على أرقام ونتائج فعلية
+                                واضحة وليس التخمين.</p>
+                        </div>
+                        <div class="why-card reveal delay-1">
+                            <h4 class="why-title" data-i18n="why2_t">التركيز على الاختبار</h4>
+                            <p class="why-desc" data-i18n="why2_d">اختبار الأفكار الإعلانية المتعددة والمحتوى البصري والجماهير للوصول
+                                للعناصر الأكثر ربحية.</p>
+                        </div>
+                        <div class="why-card reveal delay-2">
+                            <h4 class="why-title" data-i18n="why3_t">فهم النشاط التجاري</h4>
+                            <p class="why-desc" data-i18n="why3_d">ربط الإعلانات بالهدف التجاري الفعلي والمبيعات، وليس الحصول على زيارات
+                                فارغة بلا قيمة.</p>
+                        </div>
+                        <div class="why-card reveal">
+                            <h4 class="why-title" data-i18n="why4_t">العمل عبر عدة منصات</h4>
+                            <p class="why-desc" data-i18n="why4_d">تحديد واختيار المنصات والقنوات الإعلانية المناسبة وفقًا لطبيعة العميل
+                                والميزانية والجمهور.</p>
+                        </div>
+                        <div class="why-card reveal delay-1">
+                            <h4 class="why-title" data-i18n="why5_t">التحسين المستمر</h4>
+                            <p class="why-desc" data-i18n="why5_d">متابعة الأداء اليومي وإدخال تعديلات مستمرة لتحسين تكلفة الاكتساب وتطوير
+                                النتائج الإعلانية.</p>
+                        </div>
+                        <div class="why-card reveal delay-2">
+                            <h4 class="why-title" data-i18n="why6_t">الشفافية والوضوح</h4>
+                            <p class="why-desc" data-i18n="why6_d">وضوح كامل في الاستراتيجيات، آلية العمل، البيانات، ومشاركة التقارير
+                                الدورية مع الشركاء.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           CAREER OBJECTIVE SECTION
+           ========================================================================== -->
+        <section class="section" id="objective">
+            <div class="container reveal">
+                <div class="objective-container">
+                    <span class="section-label" data-i18n="obj_label">الهدف المهني</span>
+                    <p class="objective-text" data-i18n="obj_text">بناء شراكات طويلة المدى مع الشركات والعلامات التجارية التي ترغب في تطوير
+                        إعلاناتها الرقمية بطريقة منظمة وقابلة للقياس والتحسين.</p>
+                    <p class="objective-subtext" data-i18n="obj_subtext">« الهدف ليس مجرد تشغيل إعلان، بل بناء عملية إعلانية يمكن اختبارها
+                        وتحليلها وتحسينها باستمرار. »</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           CONTACT / CTA SECTION
+           ========================================================================== -->
+        <section class="section" id="contact">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="section-label" data-i18n="contact_label">تواصل معي</span>
+                    <h2 class="section-title" data-i18n="contact_title">هل لديك حملة إعلانية تحتاج إلى تطوير؟</h2>
+                    <p class="section-subtitle" data-i18n="contact_subtitle">إذا كنت تبحث عن متخصص يساعدك في إدارة حملاتك الإعلانية، فهم جمهورك،
+                        تحليل الأداء، وتحسين النتائج، يسعدني مناقشة مشروعك.</p>
+                </div>
+
+                <div class="contact-container reveal">
+                    <div class="grid-2">
+                        <!-- Contact Info block -->
+                        <div class="contact-info">
+                            <div class="contact-meta">
+                                <h3 data-i18n="contact_name">عادل مقدمي</h3>
+                                <p data-i18n="contact_role">Digital Advertising & Performance Marketing Specialist</p>
+                                <div class="badge contact-badge">
+                                    <span class="badge-dot"></span>
+                                    <span data-i18n="contact_badge">العمل عن بُعد | دول الخليج | الأسواق الدولية</span>
+                                </div>
+                            </div>
+
+                            <ul class="contact-links-list">
+                                <li class="contact-link-item">
+                                    <div class="contact-link-icon">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                            </path>
+                                            <polyline points="22,6 12,13 2,6"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="contact-link-label" data-i18n="contact_email">البريد الإلكتروني</span>
+                                        <a href="mailto:amk735151@gamil.com"
+                                            class="contact-link-value">amk735151@gamil.com</a>
+                                    </div>
+                                </li>
+                                <li class="contact-link-item">
+                                    <div class="contact-link-icon">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="contact-link-label" data-i18n="contact_whatsapp">واتساب</span>
+                                        <a href="https://wa.me/212603653501" target="_blank" rel="noopener noreferrer"
+                                            class="contact-link-value" dir="ltr">+212 603653501</a>
+                                    </div>
+                                </li>
+                                <li class="contact-link-item">
+                                    <div class="contact-link-icon">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="contact-link-label" data-i18n="contact_facebook">فيسبوك</span>
+                                        <a href="https://www.facebook.com/share/1DzhLr21P8/" target="_blank"
+                                            rel="noopener noreferrer" class="contact-link-value">Adil Mokaddemi</a>
+                                    </div>
+                                </li>
+                                <li class="contact-link-item">
+                                    <div class="contact-link-icon">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <span class="contact-link-label" data-i18n="contact_instagram">انستغرام</span>
+                                        <a href="https://www.instagram.com/adilmkadmi.ads?igsh=ZTQ0bGZzazdnbzhn"
+                                            target="_blank" rel="noopener noreferrer"
+                                            class="contact-link-value">@adilmkadmi.ads</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Contact Form block -->
+                        <div>
+                            <form class="contact-form" id="contact-form">
+                                <input type="text" name="_honey" style="display:none">
+                                <div class="form-group">
+                                    <label for="form-name" class="form-label" data-i18n="form_name_l">الاسم الكريم</label>
+                                    <input type="text" id="form-name" name="name" class="form-input"
+                                        data-i18n-placeholder="form_name_p" placeholder="أدخل اسمك الكامل" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-email" class="form-label" data-i18n="form_email_l">البريد الإلكتروني</label>
+                                    <input type="email" id="form-email" name="email" class="form-input"
+                                        data-i18n-placeholder="form_email_p" placeholder="example@domain.com" required
+                                        style="text-align: left; direction: ltr;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-company" class="form-label" data-i18n="form_company_l">اسم الشركة أو النشاط التجاري</label>
+                                    <input type="text" id="form-company" name="company" class="form-input"
+                                        data-i18n-placeholder="form_company_p" placeholder="أدخل اسم نشاطك التجاري" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-msg" class="form-label" data-i18n="form_msg_l">تفاصيل مشروعك أو استفسارك</label>
+                                    <textarea id="form-msg" name="message" class="form-input"
+                                        data-i18n-placeholder="form_msg_p" placeholder="كيف يمكنني مساعدتك في تطوير حملاتك الإعلانية؟" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary form-submit-btn" data-i18n="form_submit">إرسال الرسالة</button>
+                                <div class="form-status" id="form-status"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+    <footer class="footer">
+        <div class="container footer-content-grid">
+            <!-- Column 1: Brand Info -->
+            <div class="footer-column brand-column">
+                <div class="footer-brand-title" data-i18n="footer_brand">عادل مقدمي – Adil Ads</div>
+                <p class="footer-brand-desc" data-i18n="footer_desc">متخصص مستقل في إدارة الإعلانات الرقمية والتسويق بالأداء في دول الخليج.
+                    أساعد الشركات على بناء حملات إعلانية ذكية قائمة على البيانات والتحسين المستمر.</p>
+                <div class="footer-socials">
+                    <a href="mailto:amk735151@gamil.com" aria-label="Email" class="social-icon">✉</a>
+                    <a href="https://wa.me/212603653501" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                        class="social-icon">💬</a>
+                    <a href="https://www.facebook.com/share/1DzhLr21P8/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Facebook" class="social-icon">f</a>
+                    <a href="https://www.instagram.com/adilmkadmi.ads?igsh=ZTQ0bGZzazdnbzhn" target="_blank"
+                        rel="noopener noreferrer" aria-label="Instagram" class="social-icon">📷</a>
+                </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-column">
+                <h4 class="footer-column-title" data-i18n="footer_links_t">روابط سريعة</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#home" data-i18n="nav_home">الرئيسية</a></li>
+                    <li><a href="#about" data-i18n="nav_about">نبذة عني</a></li>
+                    <li><a href="#services" data-i18n="nav_services">الخدمات</a></li>
+                    <li><a href="#case-study" data-i18n="footer_l_case">أعمالي والنتائج</a></li>
+                    <li><a href="#contact" data-i18n="footer_l_contact">تواصل معي</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Services -->
+            <div class="footer-column">
+                <h4 class="footer-column-title" data-i18n="footer_serv_t">خدماتي الرئيسية</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#services" data-i18n="footer_s1">إدارة الحملات الإعلانية</a></li>
+                    <li><a href="#services" data-i18n="footer_s2">التسويق بالأداء</a></li>
+                    <li><a href="#services" data-i18n="footer_s3">التتبع وقياس التحويلات</a></li>
+                    <li><a href="#services" data-i18n="footer_s4">تحليل البيانات وتحسين الأداء</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Target Markets -->
+            <div class="footer-column">
+                <h4 class="footer-column-title" data-i18n="footer_markets_t">الأسواق المستهدفة</h4>
+                <ul class="footer-markets-list">
+                    <li><span>🇸🇦</span> <span data-i18n="market_sa">المملكة العربية السعودية</span></li>
+                    <li><span>🇦🇪</span> <span data-i18n="market_ae">الإمارات العربية المتحدة</span></li>
+                    <li><span>🇰🇼</span> <span data-i18n="market_kw">دولة الكويت</span></li>
+                    <li><span>🇶🇦</span> <span data-i18n="market_qa">دولة قطر</span></li>
+                    <li><span>🇧🇭</span> <span data-i18n="market_bh">مملكة البحرين</span></li>
+                    <li><span>🇴🇲</span> <span data-i18n="market_om">سلطنة عُمان</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <div class="footer-copy" data-i18n="footer_copy">
+                © 2026 عادل مقدمي (Adel Mokaddemi) — جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Sheets Configuration -->
+    <script src="js/google-sheets-config.js"></script>
+
+    <!-- JavaScript File -->
+    <script src="js/script.js"></script>
+
+    <!-- i18n Scripts -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+    
+    <!-- Awwwards Logic -->
+    <script src="js/awwwards.js"></script>
+</body>
+
+</html>

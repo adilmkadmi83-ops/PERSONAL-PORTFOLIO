@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم بالرسائل والعملاء | عادل مقدمي</title>
+    
+    <!-- Link existing portfolio style variables for color matching -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Link specific admin panel styles -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- Loader Overlay (shown by default during state check) -->
+    <div id="loader" class="loader-overlay">
+        <div class="spinner"></div>
+        <div class="loader-text" id="loader-text">جاري التحقق من الجلسة...</div>
+    </div>
+
+    <!-- Database Warning Banner (if credentials are placeholder) -->
+    <div id="warning-banner" style="display: none; background-color: var(--danger); color: white; padding: 1rem; text-align: center; font-weight: bold; position: fixed; top: 0; left: 0; right: 0; z-index: 10000; direction: rtl;">
+        تنبيه: لم يتم تكوين رابط Google Apps Script بعد في الملف <code>js/google-sheets-config.js</code>. يرجى إدخال الرابط الصحيح حتى تعمل لوحة التحكم.
+    </div>
+
+    <!-- ==========================================================================
+       LOGIN VIEW
+       ========================================================================== -->
+    <div id="login-view" class="login-container">
+        <div class="login-card">
+            <div class="login-logo">
+                <img src="img/logo.png" alt="Logo" class="login-logo-img" onerror="this.style.display='none'">
+                <span class="login-logo-text">Adil Ads</span>
+            </div>
+            
+            <h2 class="login-title">لوحة تحكم العملاء والرسائل</h2>
+            <p class="login-subtitle font-secondary">أدخل كلمة السر للوصول إلى بيانات جدول Google Sheets</p>
+            
+            <div class="login-error" id="login-error"></div>
+            
+            <form class="login-form" id="login-form">
+                <div class="form-group">
+                    <label for="login-password" class="form-label">كلمة المرور الخاصة بلوحة التحكم</label>
+                    <input type="password" id="login-password" class="form-input" placeholder="••••••••" required style="text-align: center; direction: ltr;">
+                </div>
+                <button type="submit" class="login-submit-btn" id="login-btn">تسجيل الدخول</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       DASHBOARD VIEW
+       ========================================================================== -->
+    <div id="dashboard-view" class="dashboard-container">
+        <!-- Dashboard Header -->
+        <header class="dashboard-header">
+            <div class="dashboard-brand">
+                <img src="img/logo.png" alt="Logo" class="dashboard-brand-img" onerror="this.style.display='none'">
+                <div class="dashboard-title-container">
+                    <h1>لوحة تحكم العملاء المحتملين</h1>
+                    <p>استعراض وتحميل البيانات المخزنة مباشرة في Google Sheets</p>
+                </div>
+            </div>
+            
+            <div class="dashboard-controls">
+                <!-- Theme Toggle -->
+                <button class="btn-icon-admin" id="theme-toggle-admin" aria-label="تغيير المظهر">
+                    <span id="theme-icon-container">🌙</span>
+                </button>
+
+                <!-- Export CSV Button -->
+                <button class="btn-admin" id="export-btn">
+                    <span>📥</span>
+                    <span>تصدير إلى Excel (CSV)</span>
+                </button>
+                
+                <!-- Sign Out Button -->
+                <button class="btn-admin btn-admin-danger" id="logout-btn">
+                    <span>🚪</span>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Search Bar and Stats -->
+        <div class="filter-bar">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="search-input" placeholder="البحث بالاسم، البريد الإلكتروني، أو اسم الشركة...">
+            </div>
+            <div class="stats-badge" id="stats-badge">
+                إجمالي الرسائل: 0
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-responsive">
+            <table class="leads-table" id="leads-table">
+                <thead>
+                    <tr>
+                        <th scope="col">الاسم</th>
+                        <th scope="col">البريد الإلكتروني</th>
+                        <th scope="col">الشركة / النشاط</th>
+                        <th scope="col">الرسالة</th>
+                        <th scope="col">تاريخ ووقت الإرسال</th>
+                    </tr>
+                </thead>
+                <tbody id="leads-tbody">
+                    <!-- Dynamic Rows Loaded Here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Google Sheets Configuration File -->
+    <script src="js/google-sheets-config.js"></script>
+
+    <!-- Admin JS Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle logic sync with main site
+            const themeToggleBtn = document.getElementById('theme-toggle-admin');
+            const themeIconContainer = document.getElementById('theme-icon-container');
+            const bodyElement = document.body;
+
+            const savedTheme = localStorage.getItem('portfolio-theme');
+            if (savedTheme === 'light') {
+                bodyElement.classList.add('light-theme');
+                themeIconContainer.textContent = '☀️';
+            } else {
+                bodyElement.classList.remove('light-theme');
+                themeIconContainer.textContent = '🌙';
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                bodyElement.classList.toggle('light-theme');
+                const isLight = bodyElement.classList.contains('light-theme');
+                if (isLight) {
+                    localStorage.setItem('portfolio-theme', 'light');
+                    themeIconContainer.textContent = '☀️';
+                } else {
+                    localStorage.setItem('portfolio-theme', 'dark');
+                    themeIconContainer.textContent = '🌙';
+                }
+            });
+
+            // Ensure configuration check
+            const warningBanner = document.getElementById('warning-banner');
+            if (!isGoogleSheetsConfigured()) {
+                warningBanner.style.display = 'block';
+                document.getElementById('loader').style.display = 'none';
+                return;
+            }
+
+            // UI Elements
+            const loader = document.getElementById('loader');
+            const loaderText = document.getElementById('loader-text');
+            const loginView = document.getElementById('login-view');
+            const dashboardView = document.getElementById('dashboard-view');
+            const loginForm = document.getElementById('login-form');
+            const loginError = document.getElementById('login-error');
+            const loginBtn = document.getElementById('login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const exportBtn = document.getElementById('export-btn');
+            const searchInput = document.getElementById('search-input');
+            const statsBadge = document.getElementById('stats-badge');
+            const leadsTbody = document.getElementById('leads-tbody');
+
+            let allLeads = [];
+
+            // Check if there is an active session in sessionStorage on load
+            const savedApiKey = sessionStorage.getItem('admin-api-key');
+            if (savedApiKey) {
+                loadLeads(savedApiKey);
+            } else {
+                // Show login form
+                loginView.style.display = 'flex';
+                dashboardView.style.display = 'none';
+                loader.style.display = 'none';
+            }
+
+            // Login Form Submit Handler
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                loginError.style.display = 'none';
+                loginBtn.disabled = true;
+                loginBtn.textContent = 'جاري التحقق...';
+
+                const password = document.getElementById('login-password').value.trim();
+                await loadLeads(password);
+            });
+
+            // Logout Handler
+            logoutBtn.addEventListener('click', () => {
+                loaderText.textContent = 'جاري تسجيل الخروج...';
+                loader.style.display = 'flex';
+                sessionStorage.removeItem('admin-api-key');
+                setTimeout(() => {
+                    loginView.style.display = 'flex';
+                    dashboardView.style.display = 'none';
+                    loader.style.display = 'none';
+                    document.getElementById('login-password').value = '';
+                }, 400);
+            });
+
+            // Fetch Leads from Google Sheets via Apps Script Web App
+            async function loadLeads(apiKey) {
+                loaderText.textContent = 'جاري تحميل الرسائل...';
+                loader.style.display = 'flex';
+                loginError.style.display = 'none';
+                
+                try {
+                    const response = await fetch(`${GOOGLE_SCRIPT_URL}?apiKey=${encodeURIComponent(apiKey)}`);
+                    if (!response.ok) {
+                        throw new Error('فشل الاتصال برابط الخدمة. رمز الخطأ: ' + response.status);
+                    }
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        // Password is correct, store session
+                        sessionStorage.setItem('admin-api-key', apiKey);
+                        allLeads = result.data || [];
+                        renderLeads(allLeads);
+                        
+                        loginView.style.display = 'none';
+                        dashboardView.style.display = 'block';
+                    } else {
+                        // Auth failure
+                        sessionStorage.removeItem('admin-api-key');
+                        loginView.style.display = 'flex';
+                        dashboardView.style.display = 'none';
+                        loginError.textContent = 'كلمة السر غير صحيحة. يرجى التحقق من كلمة السر ومحاولة المحاولة مرة أخرى.';
+                        loginError.style.display = 'block';
+                    }
+                } catch (err) {
+                    console.error('Error fetching leads:', err);
+                    loginError.textContent = 'حدث خطأ أثناء تحميل البيانات: ' + err.message;
+                    loginError.style.display = 'block';
+                    loginView.style.display = 'flex';
+                    dashboardView.style.display = 'none';
+                } finally {
+                    loader.style.display = 'none';
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'تسجيل الدخول';
+                }
+            }
+
+            // Render Table Rows
+            function renderLeads(leads) {
+                leadsTbody.innerHTML = '';
+                statsBadge.textContent = `إجمالي الرسائل: ${leads.length}`;
+
+                if (leads.length === 0) {
+                    leadsTbody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="empty-state">
+                                <span class="empty-state-icon">📥</span>
+                                <div class="empty-state-title">لا توجد رسائل بعد</div>
+                                <p class="empty-state-desc">لم يقم أي زائر بملء نموذج الاتصال بعد.</p>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                leads.forEach(lead => {
+                    const tr = document.createElement('tr');
+                    
+                    // Render date string safely
+                    const formattedDate = lead.created_at || '';
+
+                    tr.innerHTML = `
+                        <td class="col-name" data-label="الاسم">${escapeHTML(lead.name)}</td>
+                        <td class="col-email" data-label="البريد الإلكتروني">${escapeHTML(lead.email)}</td>
+                        <td class="col-company" data-label="الشركة / النشاط">${escapeHTML(lead.company)}</td>
+                        <td class="col-message" data-label="الرسالة">${escapeHTML(lead.message).replace(/\n/g, '<br>')}</td>
+                        <td class="col-date" data-label="تاريخ ووقت الإرسال">${escapeHTML(formattedDate)}</td>
+                    `;
+                    
+                    leadsTbody.appendChild(tr);
+                });
+            }
+
+            // Real-time Search Filter
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                const filtered = allLeads.filter(lead => {
+                    return (lead.name || '').toLowerCase().includes(query) ||
+                           (lead.email || '').toLowerCase().includes(query) ||
+                           (lead.company || '').toLowerCase().includes(query) ||
+                           (lead.message || '').toLowerCase().includes(query);
+                });
+                renderLeads(filtered);
+            });
+
+            // CSV Export Handler (With Arabic UTF-8 Excel compatibility)
+            exportBtn.addEventListener('click', () => {
+                if (allLeads.length === 0) {
+                    alert('لا توجد بيانات لتصديرها.');
+                    return;
+                }
+
+                const headers = ['الاسم', 'البريد الإلكتروني', 'اسم الشركة/النشاط', 'الرسالة', 'تاريخ ووقت الإرسال'];
+                const csvRows = [];
+                
+                // Add CSV headers
+                csvRows.push(headers.join(','));
+
+                allLeads.forEach(lead => {
+                    const nameEscaped = (lead.name || '').replace(/"/g, '""');
+                    const emailEscaped = (lead.email || '').replace(/"/g, '""');
+                    const companyEscaped = (lead.company || '').replace(/"/g, '""');
+                    const messageEscaped = (lead.message || '').replace(/"/g, '""');
+                    const dateFormatted = (lead.created_at || '').replace(/"/g, '""');
+
+                    csvRows.push(`"${nameEscaped}","${emailEscaped}","${companyEscaped}","${messageEscaped}","${dateFormatted}"`);
+                });
+
+                // Prepend UTF-8 BOM to prevent Arabic characters corruption in Microsoft Excel
+                const csvContent = "\ufeff" + csvRows.join("\n");
+                
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                
+                const link = document.createElement("a");
+                link.setAttribute("href", url);
+                link.setAttribute("download", `رسائل_العملاء_${new Date().toISOString().split('T')[0]}.csv`);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+
+            // HTML escaping helper to prevent XSS
+            function escapeHTML(str) {
+                if (!str) return '';
+                return str
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+        });
+    </script>
+</body>
+</html>
